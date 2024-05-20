@@ -9,8 +9,8 @@ from sklearn.model_selection import cross_val_score
 
 
 # format files
-format_train_file()
-format_test_file()
+# format_train_file()
+# format_test_file()
 
 train_dataset = read_csv('formatted_data/formatted_train.csv')
 test_dataset = read_csv('formatted_data/formatted_test_with_results.csv')
@@ -26,7 +26,7 @@ x_test = test_dataset.drop([SALE_PRICE_KEY, ID_KEY], axis=1)
 compare_models(x_train, y_train)
 
 # choose the best model
-model = GradientBoostingRegressor()
+model = CatBoostRegressor(verbose=False)
 model = model.fit(x_train, y_train.values.ravel())
 
 y_pred = model.predict(x_test)
