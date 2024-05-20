@@ -26,7 +26,8 @@ def compare_models(x_train, y_train):
     for i in range(len(models)):
         model = models[i]
         model_name = model_names[i]
-        rmse = np.mean(np.sqrt(-cross_val_score(model, x_train, y_train.values.ravel(), cv=5, scoring="neg_mean_squared_error")))
+        rmse = np.mean(np.sqrt(-cross_val_score(model, x_train, y_train.values.ravel(),
+                                                cv=5, scoring="neg_mean_squared_error")))
         print('\t', model_name, round(rmse, 4))
 
     # result:
