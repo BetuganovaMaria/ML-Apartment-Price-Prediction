@@ -1,16 +1,16 @@
 from data_formatting import *
-from model_comparing import *
+from model_comparing import compare_models, print_feature_importances
 from constants import SALE_PRICE_KEY, ID_KEY
+from catboost import CatBoostRegressor
 import matplotlib.pyplot as plt
 import numpy as np
 from pandas import read_csv, DataFrame
-from sklearn.ensemble import GradientBoostingRegressor
 from sklearn.model_selection import cross_val_score
 
 
 # format files
-# format_train_file()
-# format_test_file()
+format_train_file()
+format_test_file()
 
 train_dataset = read_csv('formatted_data/formatted_train.csv')
 test_dataset = read_csv('formatted_data/formatted_test_with_results.csv')
@@ -31,7 +31,7 @@ model = model.fit(x_train, y_train.values.ravel())
 
 y_pred = model.predict(x_test)
 mse = np.mean(np.sqrt(-cross_val_score(model, x_test, y_test.values.ravel(), cv=5, scoring="neg_mean_squared_error")))
-print(f'MSE: {mse}')  # mse = 12302.83934392931
+print(f'MSE CatBoostRegressor: {mse}')  # mse = 12302.83934392931
 
 # to see which parameters affect the most
 print_feature_importances(column_keys, model)
