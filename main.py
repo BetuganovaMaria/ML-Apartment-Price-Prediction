@@ -9,8 +9,8 @@ from sklearn.model_selection import cross_val_score
 
 
 # format files
-format_train_file()
-format_test_file()
+format_file('train.csv')
+format_file('test_with_results.csv')
 
 train_dataset = read_csv('formatted_data/formatted_train.csv')
 test_dataset = read_csv('formatted_data/formatted_test_with_results.csv')

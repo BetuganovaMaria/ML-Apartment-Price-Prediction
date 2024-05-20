@@ -2,35 +2,23 @@ from constants import *
 from corr_operations import check_corr_emptiness, check_corr_coefficients
 from pandas import read_csv
 
+# train.csv
+# test_with_results.csv
 
-def format_train_file():
-    train_dataset = read_csv('data/train.csv')
 
-    train_dataset = format_data_types(train_dataset)
+def format_file(filename):
+    dataset = read_csv(f'data/{filename}')
 
-    corr_coefficients = train_dataset.corr()
+    dataset = format_data_types(dataset)
+
+    corr_coefficients = dataset.corr()
     check_corr_emptiness(corr_coefficients)
     check_corr_coefficients(corr_coefficients)
 
     corr_fields = [GR_LIV_AREA_KEY, FIRST_FLR_SF_KEY]  # for deleting one of two dependent values
-    new_train_dataset = train_dataset.drop(corr_fields, axis=1)
+    new_dataset = dataset.drop(corr_fields, axis=1)
 
-    create_formatted_file(new_train_dataset, 'formatted_train.csv')
-
-
-def format_test_file():
-    test_dataset = read_csv('data/test_with_results.csv')
-
-    test_dataset = format_data_types(test_dataset)
-
-    corr_coefficients = test_dataset.corr()
-    check_corr_emptiness(corr_coefficients)
-    check_corr_coefficients(corr_coefficients)
-
-    corr_fields = [GR_LIV_AREA_KEY, FIRST_FLR_SF_KEY]  # for deleting one of two dependent values
-    new_test_dataset = test_dataset.drop(corr_fields, axis=1)
-
-    create_formatted_file(new_test_dataset, 'formatted_test_with_results.csv')
+    create_formatted_file(new_dataset, f'formatted_{filename}')
 
 
 def format_data_types(df):
