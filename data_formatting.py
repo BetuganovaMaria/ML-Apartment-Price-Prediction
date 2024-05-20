@@ -2,9 +2,6 @@ from constants import *
 from corr_operations import check_corr_emptiness, check_corr_coefficients
 from pandas import read_csv
 
-# train.csv
-# test_with_results.csv
-
 
 def format_file(filename):
     dataset = read_csv(f'data/{filename}')
