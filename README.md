@@ -1,4 +1,4 @@
-# MLTestTask
+# ML Apartment Price Prediction
 
 Model for sale price predicting.
 
